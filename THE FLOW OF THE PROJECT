@@ -1,0 +1,11 @@
+I developed a Flutter-based Event Finder application that allows users to explore events dynamically fetched from a mock API.
+
+The app consists of two main screens: a Home Screen, which displays a scrollable list of events, and an Event Detail Screen, which shows complete information about a selected event.
+
+I integrated the API using the HTTP package and converted JSON responses into Dart models for structured data handling.
+
+The application includes proper state management with loading, error, and empty states, and navigation between screens is implemented using Flutter’s Navigator.
+
+To enhance user experience, I added pull-to-refresh functionality and a search bar UI.
+
+The project follows a clean and organized architecture with separate folders for screens, models, services, and reusable widgets.
