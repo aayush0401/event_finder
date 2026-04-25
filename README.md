@@ -1,17 +1,32 @@
-# event_finder
+# Event Finder App (Flutter)
 
-A new Flutter project.
+## 📱 Overview
+This is a Flutter-based Event Finder application that allows users to browse and explore nearby events such as concerts, sports events, and meetups.
 
-## Getting Started
+## 🚀 Features
+- Fetches event data dynamically from a mock API
+- Displays events in a clean, scrollable list
+- Detailed event view with complete information
+- Navigation between Home and Event Detail screens
+- Pull-to-refresh functionality
+- Search bar UI for events
 
-This project is a starting point for a Flutter application.
+## 🌐 Mock API Endpoint
+https://event-finder-aayush.free.beeceptor.com/events
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tech Stack
+- Flutter
+- Dart
+- HTTP package (API integration)
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## 📂 Project Structure
+- /screens → UI screens
+- /models → Data models
+- /services → API handling
+- /widgets → Reusable components
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ▶️ How to Run
+1. Clone the repository
+2. Run `flutter pub get`
+3. Run `flutter run`
+
