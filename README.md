@@ -30,3 +30,5 @@ https://event-finder-aayush.free.beeceptor.com/events
 2. Run `flutter pub get`
 3. Run `flutter run`
 
+## 🎥 Demo Video
+https://www.loom.com/share/3982db08e04f42a8a9cdbffc79cbb5a5
