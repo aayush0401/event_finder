@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/event_model.dart';
+import '../widgets/event_image.dart';
 
 class EventDetailScreen extends StatelessWidget {
   final Event event;
@@ -16,22 +17,11 @@ class EventDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: SizedBox(
-                width: double.infinity,
-                height: 200,
-                child: Image.network(
-                  event.image,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, error, stackTrace) {
-                    return const ColoredBox(
-                      color: Color(0xFFE0E0E0),
-                      child: Center(child: Icon(Icons.broken_image)),
-                    );
-                  },
-                ),
-              ),
+            EventImage(
+              imageUrl: event.image,
+              width: double.infinity,
+              height: 220,
+              borderRadius: BorderRadius.circular(8),
             ),
             const SizedBox(height: 12),
             Text(
@@ -39,30 +29,26 @@ class EventDetailScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            Text(
-              event.category,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.grey.shade700,
-                fontWeight: FontWeight.w500,
+            Chip(
+              label: Text(event.category),
+              side: BorderSide.none,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              labelStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
             ),
             const SizedBox(height: 12),
-            Row(
-              children: [
-                const Icon(Icons.calendar_today, size: 18),
-                const SizedBox(width: 8),
-                Expanded(child: Text('${event.date} • ${event.time}')),
-              ],
+            _DetailInfoRow(
+              icon: Icons.calendar_today_outlined,
+              text: '${event.date} | ${event.time}',
             ),
             const SizedBox(height: 12),
-            Row(
-              children: [
-                const Icon(Icons.location_on, size: 18),
-                const SizedBox(width: 8),
-                Expanded(child: Text(event.location)),
-              ],
+            _DetailInfoRow(
+              icon: Icons.location_on_outlined,
+              text: event.location,
             ),
+            const SizedBox(height: 12),
+            _DetailInfoRow(icon: Icons.near_me_outlined, text: event.distance),
             const SizedBox(height: 12),
             Text(
               event.description,
@@ -76,7 +62,7 @@ class EventDetailScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 child: const Text('Get Tickets'),
@@ -85,6 +71,25 @@ class EventDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _DetailInfoRow extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const _DetailInfoRow({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 18, color: Colors.grey.shade700),
+        const SizedBox(width: 8),
+        Expanded(child: Text(text)),
+      ],
     );
   }
 }

@@ -34,6 +34,17 @@ class Event {
     return 0;
   }
 
+  static dynamic _firstValue(Map<String, dynamic> json, List<String> keys) {
+    for (final key in keys) {
+      final value = json[key];
+      if (value != null) {
+        return value;
+      }
+    }
+
+    return null;
+  }
+
   static String _toStringValue(dynamic value, {String fallback = ''}) {
     if (value == null) {
       return fallback;
@@ -45,15 +56,23 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      id: _toInt(json['id']),
+      id: _toInt(_firstValue(json, const ['id', 'eventId', 'event_id'])),
       title: _toStringValue(json['title'], fallback: 'Untitled Event'),
       category: _toStringValue(json['category'], fallback: 'General'),
       date: _toStringValue(json['date'], fallback: 'TBD'),
       time: _toStringValue(json['time'], fallback: 'TBD'),
       location: _toStringValue(json['location'], fallback: 'Unknown location'),
-      image: _toStringValue(json['image']),
-      distance: _toStringValue(json['distance'], fallback: 'N/A'),
-      description: _toStringValue(json['description'], fallback: 'No description available.'),
+      image: _toStringValue(
+        _firstValue(json, const ['imageUrl', 'image_url', 'image']),
+      ),
+      distance: _toStringValue(
+        _firstValue(json, const ['distance', 'distanceInfo']),
+        fallback: 'N/A',
+      ),
+      description: _toStringValue(
+        json['description'],
+        fallback: 'No description available.',
+      ),
     );
   }
 
@@ -65,7 +84,7 @@ class Event {
       'date': date,
       'time': time,
       'location': location,
-      'image': image,
+      'imageUrl': image,
       'distance': distance,
       'description': description,
     };

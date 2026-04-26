@@ -56,7 +56,9 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HomeScreen(apiService: _DelayedApiService(() => completer.future)),
+        home: HomeScreen(
+          apiService: _DelayedApiService(() => completer.future),
+        ),
       ),
     );
 
@@ -85,16 +87,20 @@ void main() {
 
     expect(find.text('Tech Meetup'), findsWidgets);
     expect(find.text('Technology'), findsOneWidget);
-    expect(find.text('2026-05-01 • 18:30'), findsOneWidget);
+    expect(find.text('2026-05-01 | 18:30'), findsOneWidget);
     expect(find.text('City Hall'), findsOneWidget);
     expect(find.text('A community meetup for developers.'), findsOneWidget);
     expect(find.text('Get Tickets'), findsOneWidget);
   });
 
-  testWidgets('shows error message when API fails', (WidgetTester tester) async {
+  testWidgets('shows error message when API fails', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
-        home: HomeScreen(apiService: _FailingApiService('Failed to load events')),
+        home: HomeScreen(
+          apiService: _FailingApiService('Failed to load events'),
+        ),
       ),
     );
     await tester.pumpAndSettle();
